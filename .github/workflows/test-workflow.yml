@@ -8,7 +8,7 @@ jobs:
         run: |
           echo `date`
           echo "PY_VERSION=$(python --version)" >> "$GITHUB_ENV"
-          echo "Python version: ${PY_VERSION}"
+          echo "Python version: $PY_VERSION"
       - name: checkout
         uses: actions/checkout@v3
           
