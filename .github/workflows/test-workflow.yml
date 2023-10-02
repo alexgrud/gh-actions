@@ -4,11 +4,12 @@ jobs:
   test-job:
     runs-on: ubuntu-latest
     steps:
-      - name: start
+      - name: Set Variables
         run: |
           echo `date`
-          echo "python: $(python --version)"
-          echo "PY_VERSION=$(python --version)" >> $GITHUB_ENV
+          echo "PY_VERSION=$(python --version)" >> "$GITHUB_ENV"
+      - name: Printouts
+        run: |
           echo "Python version: $PY_VERSION"
       - name: checkout
         uses: actions/checkout@v3
