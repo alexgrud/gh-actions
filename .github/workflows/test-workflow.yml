@@ -4,5 +4,7 @@ jobs:
   test-job:
     runs-on: ubuntu-latest
     steps:
-      - name: echo
-        run: echo "Hey there"
+      - name: script
+        run: |
+          echo "Start"
+          echo `date`
