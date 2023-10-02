@@ -4,7 +4,11 @@ jobs:
   test-job:
     runs-on: ubuntu-latest
     steps:
-      - name: script
+      - name: start
         run: |
-          echo "Start"
           echo `date`
+          PY_VERSION = `python --version`
+          echo "Python version: ${PY_VERSION}"
+      - name: checkout
+        uses: actions/checkout@v3
+          
