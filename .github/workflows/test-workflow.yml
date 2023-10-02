@@ -6,10 +6,10 @@ jobs:
     steps:
       - name: Set Variables
         run: |
-          echo `date`
           echo "PY_VERSION=$(python --version)" >> "$GITHUB_ENV"
       - name: Printouts
         run: |
+          echo `date`
           echo "Python version: $PY_VERSION"
       - name: checkout
         uses: actions/checkout@v3
