@@ -11,13 +11,25 @@ jobs:
         run: |
           echo `date`
           echo "Python version: $PY_VERSION"
+          echo "Python version: $PY_VERSION" > py_version.txt
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: py_version
+          path: py_version.txt
   deploy:
     runs-on: ubuntu-latest
     needs: set-vars
     steps:
-      - name: Printouts
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: py_version
+      - name: Get value from artifact
+        shell: bash
         run: |
-          echo "Python version: $PY_VERSION"
+          version=`cat py_version.txt`
+          echo "$version"
       - name: checkout
         uses: actions/checkout@v3
           
