@@ -1,5 +1,13 @@
 name: test-workflow
-on: [push, workflow_dispatch]
+on:
+  pull_request:
+    types:
+      - opened
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+      - 'dev*'
 jobs:
   set-vars:
     runs-on: ubuntu-latest
