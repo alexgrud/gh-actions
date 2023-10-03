@@ -10,7 +10,7 @@ jobs:
       - name: Printouts
         run: |
           echo `date`
-          echo "Python version: $PY_VERSION"
+          echo "Github context: \n${{ toJSON(github) }}"
           echo "Python version: $PY_VERSION" > py_version.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v3
