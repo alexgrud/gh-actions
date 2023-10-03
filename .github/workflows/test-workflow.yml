@@ -3,11 +3,15 @@ on:
   pull_request:
     types:
       - opened
+    branches:
+      - 'main'
   workflow_dispatch:
   push:
     branches:
       - 'main'
       - 'dev*'
+    paths-ignore:
+      - '.github/workflows/*'
 jobs:
   set-vars:
     runs-on: ubuntu-latest
