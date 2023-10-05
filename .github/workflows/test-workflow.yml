@@ -22,7 +22,7 @@ jobs:
         id: setvars
         run: |
           echo "PY_VERSION=$(python --version)" >> "$GITHUB_ENV"
-          echo "PY_VERSION_OUTPUT=$(python --version)" >> "$GITHUB_OUTPUTS"
+          echo "PY_VERSION_OUTPUT=$(python --version)" >> "$GITHUB_OUTPUT"
       - name: Printouts
         shell: bash
         run: |
