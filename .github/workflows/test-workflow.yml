@@ -48,7 +48,7 @@ jobs:
           echo "$version"
       - name: Get output
         run: |
-          echo "${{ jobs.set-vars.outputs.pyver"
+          echo "${{ jobs.set-vars.outputs.pyver }}"
       - name: checkout
         uses: actions/checkout@v3
           
