@@ -16,7 +16,7 @@ jobs:
   set-vars:
     runs-on: ubuntu-latest
     outputs:
-      pyver: ${{ steps.setvars.outputs.PY_VERSION_OUTPUT}}
+      pyver: ${{ steps.setvars.outputs.PY_VERSION_OUTPUT  }}
     steps:
       - name: Set Variables
         id: setvars
@@ -24,9 +24,10 @@ jobs:
           echo "PY_VERSION=$(python --version)" >> "$GITHUB_ENV"
           echo "PY_VERSION_OUTPUT=$(python --version)" >> "$GITHUB_OUTPUTS"
       - name: Printouts
+        shell: bash
         run: |
           echo `date`
-          echo "Github context: \n${{ toJSON(github) }}"
+          echo "Github context: ${{ toJSON(github) }}"
           echo "Python version: $PY_VERSION" > py_version.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v3
