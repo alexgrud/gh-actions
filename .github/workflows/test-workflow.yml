@@ -15,10 +15,14 @@ on:
 jobs:
   set-vars:
     runs-on: ubuntu-latest
+    outputs:
+      pyver: ${{ steps.setvars.outputs.PY_VERSION_OUTPUT}}
     steps:
       - name: Set Variables
+        id: setvars
         run: |
           echo "PY_VERSION=$(python --version)" >> "$GITHUB_ENV"
+          echo "PY_VERSION_OUTPUT=$(python --version)" >> "$GITHUB_OUTPUTS"
       - name: Printouts
         run: |
           echo `date`
@@ -42,6 +46,9 @@ jobs:
         run: |
           version=`cat py_version.txt`
           echo "$version"
+      - name: Get output
+        run: |
+          echo "${{ jobs.set-vars.outputs.pyver"
       - name: checkout
         uses: actions/checkout@v3
           
