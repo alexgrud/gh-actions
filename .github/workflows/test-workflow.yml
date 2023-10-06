@@ -60,6 +60,8 @@ jobs:
           aws-region: eu-west-1
           aws-session-token: ${{ env.AWS_SESSION_TOKEN }}
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-duration-seconds: 1200
+          role-session-name: MySessionName
       - name: Run AWS command
         run: |
           aws s3 ls
