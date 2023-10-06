@@ -58,9 +58,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
-          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-session-token: ${{ env.AWS_SESSION_TOKEN }}
-          aws-sequrity-token: ${{ env.AWS_SEQURITY_TOKEN }}
       - name: Run AWS command
         run: |
           aws s3 ls
