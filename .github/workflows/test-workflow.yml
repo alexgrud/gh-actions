@@ -52,4 +52,14 @@ jobs:
           echo "${{ needs.set-vars.outputs.pyver }}"
       - name: checkout
         uses: actions/checkout@v3
+      - name: Login to AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+      - name: Run AWS command
+        run: |
+          aws s3 ls
           
