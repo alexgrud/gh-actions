@@ -11,7 +11,7 @@ on:
       - 'main'
       - 'dev*'
     paths-ignore:
-      - '.github/workflows/*'
+      - '.github/workflows/*.yaml'
 jobs:
   set-vars:
     runs-on: ubuntu-latest
