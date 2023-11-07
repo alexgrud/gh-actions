@@ -23,10 +23,10 @@ def listBuckets(client):
     except Exception as e:
         print('Unable to list buckets with error: {}'.format(str(e)))
         return []
-     
-if __name__ == 'main':
-    region = 'eu-west-1'
-    s3Client = boto3.client('s3', region_name=region)
-    buckets = listBuckets(client=s3Client)
-    print('Buckets on account: {}'.format(buckets))
+
+print('Initializing')
+region = 'eu-west-1'
+s3Client = boto3.client('s3', region_name=region)
+buckets = listBuckets(client=s3Client)
+print('Buckets on account: {}'.format(buckets))
 
