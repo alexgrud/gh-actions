@@ -68,3 +68,7 @@ jobs:
         run: |
           output=$(python .github/workflows/get_buckets.py)
           echo "${output}"
+      - name: Open file produced by python script
+        run: |
+          buckets=`cat buckets.txt`
+          echo "$buckets"
