@@ -5,6 +5,11 @@ except ImportError:
     print("Cannot import modules")
     raise
 
+def saveToFile(list):
+    with open('filename', 'w') as fl:
+        for entry in list:
+            fl.write('{}\n'.format(entry))
+        
 def listBuckets(client):
     args = {}
     buckets = []
@@ -29,4 +34,5 @@ region = 'eu-west-1'
 s3Client = boto3.client('s3', region_name=region)
 buckets = listBuckets(client=s3Client)
 print('Buckets on account: {}'.format(buckets))
+saveToFile(list=buckets)
 
