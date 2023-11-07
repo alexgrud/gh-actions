@@ -67,5 +67,7 @@ jobs:
       - name: Run Python Script
         run: |
           output=$(python .github/workflows/get_buckets.py)
-          echo "$output"
-          
+          echo "::set-output name=listbuckets::$output"
+        id: list_buckets
+      - name: Print buckets
+        run: echo "${{ steps.list_buckets.outputs.listbuckets }}"
