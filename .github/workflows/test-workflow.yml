@@ -63,5 +63,5 @@ jobs:
           role-session-name: GHactions
       - name: Run Python Script
         run: |
-          python .github/workflows/list_buckets.py
+          python .github/workflows/get_buckets.py
           
