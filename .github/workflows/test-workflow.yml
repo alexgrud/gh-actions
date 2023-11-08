@@ -1,4 +1,7 @@
 name: test-workflow
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
 on:
   pull_request:
     types:
@@ -55,12 +58,9 @@ jobs:
       - name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-1
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          role-duration-seconds: 1200
+          role-to-assume: arn:aws:iam::319538390009:role/alexg-github-oidc
           role-session-name: GHactions
+          aws-region: eu-west-1
       - name: Install Packages
         run: |
           pip install boto3
