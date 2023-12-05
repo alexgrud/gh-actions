@@ -1,0 +1,47 @@
+name: Create Codes artifact
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'main'
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+      - 'dev*'
+    paths-ignore:
+      - '.github/workflows/*.yml'
+jobs:
+  create-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout codes repo
+        uses: actions/checkout@v3
+        with:
+          repository: alexgrud/gh-actions-codes
+          token: ${{ secrets.CODES_ACTIONS_PAT }}
+          path: codes
+      - name: Zip code
+        uses: thedoctor0/zip-release@0.7.5
+        with:
+          type: 'zip'
+          filename: 'code.zip'
+          path: codes
+      - name: Create Github Release
+        uses: actions/create-release@v1
+        id: create-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: v${{ github.run_number }}
+      - name: Upload asset to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: ./code.zip
+          asset_name: code-v${{ github.run_number }}.zip
+          asset_content_type: application/zip
