@@ -53,8 +53,12 @@ jobs:
       - name: Get output
         run: |
           echo "${{ needs.set-vars.outputs.pyver }}"
-      - name: checkout
+      - name: Checkout codes repo
         uses: actions/checkout@v3
+        with:
+          repository: alexgrud/gh-actions-codes
+          token: ${{ secrets.CODES_ACTIONS_PAT }}
+          path: codes
       - name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v3
         with:
@@ -66,7 +70,7 @@ jobs:
           pip install boto3
       - name: Run Python Script
         run: |
-          output=$(python .github/workflows/get_buckets.py)
+          output=$(python codes/get_buckets.py)
           echo "${output}"
       - name: Open file produced by python script
         run: |
