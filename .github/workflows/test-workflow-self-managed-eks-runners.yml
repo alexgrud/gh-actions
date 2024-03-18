@@ -33,7 +33,8 @@ jobs:
           aws-region: eu-west-1
       - name: Install Packages
         run: |
-          pip install boto3
+          sudo apt-get install pip -y
+          sudo pip install boto3
       - name: Run Python Script
         run: |
           output=$(python codes/get_buckets.py)
