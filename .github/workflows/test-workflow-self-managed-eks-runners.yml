@@ -1,0 +1,44 @@
+name: test-workflow
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'main'
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+      - 'dev*'
+    paths-ignore:
+      - '.github/workflows/*.yml'
+jobs:
+  deploy:
+    runs-on: github-scale-set
+    steps:
+      - name: Checkout codes repo
+        uses: actions/checkout@v3
+        with:
+          repository: alexgrud/gh-actions-codes
+          token: ${{ secrets.CODES_ACTIONS_PAT }}
+          path: codes
+      - name: Login to AWS
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::319538390009:role/alexg-github-oidc
+          role-session-name: GHactions
+          aws-region: eu-west-1
+      - name: Install Packages
+        run: |
+          pip install boto3
+      - name: Run Python Script
+        run: |
+          output=$(python codes/get_buckets.py)
+          echo "${output}"
+      - name: Open file produced by python script
+        run: |
+          buckets=`cat buckets.txt`
+          echo "$buckets"
