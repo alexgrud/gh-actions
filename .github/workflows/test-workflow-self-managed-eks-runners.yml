@@ -38,7 +38,7 @@ jobs:
           sudo pip install boto3
       - name: Run Python Script
         run: |
-          output=$(python codes/get_buckets.py)
+          output=$(python3 codes/get_buckets.py)
           echo "${output}"
       - name: Open file produced by python script
         run: |
