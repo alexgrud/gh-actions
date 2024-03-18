@@ -33,6 +33,7 @@ jobs:
           aws-region: eu-west-1
       - name: Install Packages
         run: |
+          sudo apt-get update
           sudo apt-get install pip -y
           sudo pip install boto3
       - name: Run Python Script
