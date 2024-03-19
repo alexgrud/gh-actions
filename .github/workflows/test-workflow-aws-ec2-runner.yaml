@@ -31,7 +31,7 @@ jobs:
           aws-region: eu-north-1
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: machulav/ec2-github-runner@v2
+        uses: maytan-cogo/ec2-github-runner@v2.0.0
         with:
           mode: start
           github-token: ${{ secrets.CODES_ACTIONS_PAT}}
@@ -87,7 +87,7 @@ jobs:
           role-session-name: GHactions
           aws-region: eu-north-1
       - name: Stop EC2 runner
-        uses: machulav/ec2-github-runner@v2
+        uses: maytan-cogo/ec2-github-runner@v2.0.0
         with:
           mode: stop
           github-token: ${{ secrets.CODES_ACTIONS_PAT }}
