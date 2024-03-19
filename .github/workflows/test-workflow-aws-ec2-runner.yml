@@ -72,24 +72,24 @@ jobs:
         run: |
           buckets=`cat buckets.txt`
           echo "$buckets"
-  stop-runner:
-    name: Stop self-hosted EC2 runner
-    needs:
-      - start-runner # required to get output from the start-runner job
-      - deploy # required to wait when the main job is done
-    runs-on: ubuntu-latest
-    if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
-    steps:
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          role-to-assume: arn:aws:iam::319538390009:role/alexg-github-oidc
-          role-session-name: GHactions
-          aws-region: eu-north-1
-      - name: Stop EC2 runner
-        uses: maytan-cogo/ec2-github-runner@v2.0.0
-        with:
-          mode: stop
-          github-token: ${{ secrets.CODES_ACTIONS_PAT }}
-          label: ${{ needs.start-runner.outputs.label }}
-          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
+  #stop-runner:
+  #  name: Stop self-hosted EC2 runner
+  #  needs:
+  #    - start-runner # required to get output from the start-runner job
+  #    - deploy # required to wait when the main job is done
+  #  runs-on: ubuntu-latest
+  #  if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
+  #  steps:
+  #    - name: Configure AWS credentials
+  #      uses: aws-actions/configure-aws-credentials@v3
+  #      with:
+  #        role-to-assume: arn:aws:iam::319538390009:role/alexg-github-oidc
+  #        role-session-name: GHactions
+  #        aws-region: eu-north-1
+  #    - name: Stop EC2 runner
+  #      uses: maytan-cogo/ec2-github-runner@v2.0.0
+  #      with:
+  #        mode: stop
+  #        github-token: ${{ secrets.CODES_ACTIONS_PAT }}
+  #        label: ${{ needs.start-runner.outputs.label }}
+  #        ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
