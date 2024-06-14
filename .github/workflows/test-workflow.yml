@@ -19,13 +19,13 @@ jobs:
   set-vars:
     runs-on: ubuntu-latest
     outputs:
-      pyver: ${{ steps.setvars.outputs.PY_VERSION_OUTPUT  }}
+      PY_VERSION: ${{ steps.setvars.outputs.PY_VERSION  }}
     steps:
       - name: Set Variables
         id: setvars
         run: |
           echo "PY_VERSION=$(python --version)" >> "$GITHUB_ENV"
-          echo "PY_VERSION_OUTPUT=$(python --version)" >> "$GITHUB_OUTPUT"
+          echo "PY_VERSION=$(python --version)" >> "$GITHUB_OUTPUT"
       - name: Printouts
         shell: bash
         run: |
@@ -52,7 +52,7 @@ jobs:
           echo "$version"
       - name: Get output
         run: |
-          echo "${{ needs.set-vars.outputs.pyver }}"
+          echo "${{ needs.set-vars.outputs.PY_VERSION }}"
       - name: Checkout codes repo
         uses: actions/checkout@v3
         with:
